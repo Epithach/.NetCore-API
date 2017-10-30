@@ -32,32 +32,33 @@ namespace NetCoreApi.Controllers
     [Route("api/Car")]
     public class CarController : Controller
     {
-        public List<Car> _carList;
+        public List<Car> CarList;
 
         public CarController()
         {
-            _carList = new List<Car>();
-            _carList.Add(new Car() { Id = 0, Brand = "Mercedes", Model = "SLS AMG", Price = 450000, HorsePower = 400, nbSeats = 2 });
-            _carList.Add(new Car() { Id = 1, Brand = "Ford", Model = "Galaxy", Price = 75000, HorsePower = 250, nbSeats = 7 });
-            _carList.Add(new Car() { Id = 2, Brand = "Renault", Model = "Laguna", Price = 25000, HorsePower = 200, nbSeats = 5 });
-            _carList.Add(new Car() { Id = 3, Brand = "Fiat", Model = "Punto", Price = 20000, HorsePower = 200, nbSeats = 5 });
-            _carList.Add(new Car() { Id = 4, Brand = "Audi", Model = "R8", Price = 200000, HorsePower = 400, nbSeats = 2 });
-            _carList.Add(new Car() { Id = 5, Brand = "BMW", Model = "Serie 1", Price = 100000, HorsePower = 300, nbSeats = 5 });
-            _carList.Add(new Car() { Id = 6, Brand = "Wolkswagen", Model = "Passat", Price = 80000, HorsePower = 300, nbSeats = 5 });
+            CarList = new List<Car>();
+
+            CarList.Add(new Car() { Id = 0, Brand = "Mercedes", Model = "SLS AMG", Price = 450000, HorsePower = 400, nbSeats = 2 });
+            CarList.Add(new Car() { Id = 1, Brand = "Ford", Model = "Galaxy", Price = 75000, HorsePower = 250, nbSeats = 7 });
+            CarList.Add(new Car() { Id = 2, Brand = "Renault", Model = "Laguna", Price = 25000, HorsePower = 200, nbSeats = 5 });
+            CarList.Add(new Car() { Id = 3, Brand = "Fiat", Model = "Punto", Price = 20000, HorsePower = 200, nbSeats = 5 });
+            CarList.Add(new Car() { Id = 4, Brand = "Audi", Model = "R8", Price = 200000, HorsePower = 400, nbSeats = 2 });
+            CarList.Add(new Car() { Id = 5, Brand = "BMW", Model = "Serie 1", Price = 100000, HorsePower = 300, nbSeats = 5 });
+            CarList.Add(new Car() { Id = 6, Brand = "Wolkswagen", Model = "Passat", Price = 80000, HorsePower = 300, nbSeats = 5 });
         }
 
         [HttpGet]
         [Route("")]
         public List<Car> GetAll()
         {
-            return _carList;
+            return CarList;
         }
 
         [HttpGet]
         [Route("{id:int}")]
         public Car GetById(int id)
         {
-            var element = _carList.Where(e => e.Id == id).FirstOrDefault();
+            var element = CarList.Where(e => e.Id == id).FirstOrDefault();
             return element;
         }
 
@@ -65,7 +66,7 @@ namespace NetCoreApi.Controllers
         [Route("{id:int}")]
         public void Update(Car car)
         {
-            _carList.Select(c => { c = car ; return c; }).ToList();
+            CarList.Select(c => { c = car ; return c; }).ToList();
             return ;
         }
 
@@ -75,7 +76,7 @@ namespace NetCoreApi.Controllers
         {
             try
             {
-                _carList.RemoveAt(id);
+                CarList.RemoveAt(id);
                 return true;
             }
             catch
