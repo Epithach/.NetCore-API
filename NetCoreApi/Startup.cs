@@ -23,6 +23,12 @@ namespace NetCoreApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
+                                                                            .AllowAnyMethod()
+                                                                            .AllowAnyHeader()
+                                                                            .AllowAnyOrigin()
+                                                                            .AllowCredentials()));
+
             services.AddMvc();
         }
 
@@ -33,6 +39,15 @@ namespace NetCoreApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("AllowAll");
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
 
             app.UseMvc();
         }
