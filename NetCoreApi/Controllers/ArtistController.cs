@@ -62,9 +62,33 @@ namespace NetCoreApi.Controllers
             return this.ArtistList;
         }
 
+        [Route("{id:int}")]
         public Artist GetById(int id)
         {
             return this.ArtistList.Where(e => e.Id == id).FirstOrDefault();
+        }
+
+        [Route("GetByMusicType")]
+        [HttpPost]
+        public List<Artist> GetByMusicType(List<MusicType> list)
+        {
+            return new List<Artist>();
+        }
+
+        [Route("{id:int}")]
+        [HttpPut]
+        public void Update(int id, Artist element)
+        {
+            this.ArtistList[id] = element;
+            return ;
+        }
+
+        [Route("{id:int}")]
+        [HttpDelete]
+        public void Delete(int id)
+        {
+            this.ArtistList.RemoveAt(id);
+            return ;
         }
     }
 }
